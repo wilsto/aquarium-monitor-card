@@ -34,6 +34,8 @@ Every sensor comes with **preset ideal ranges** — just point to your entity an
 
 *The #1 killer in aquariums. Ammonia and nitrite must be zero in a cycled tank.*
 
+![Ammonia](resources/ammonia.png) ![Nitrite](resources/nitrite.png) ![Nitrate](resources/nitrate.png)
+
 | Sensor | Key | Unit | Default Setpoint |
 |--------|-----|------|:----------------:|
 | Ammonia | `ammonia` | ppm | 0 |
@@ -43,6 +45,8 @@ Every sensor comes with **preset ideal ranges** — just point to your entity an
 ### Water Chemistry
 
 *Stability matters more than hitting exact numbers. Sudden shifts stress fish.*
+
+![Temperature](resources/temperature.png) ![pH](resources/ph.png) ![General Hardness](resources/gh.png) ![Carbonate Hardness](resources/kh.png) ![CO2](resources/co2.png)
 
 | Sensor | Key | Unit | Default Setpoint |
 |--------|-----|------|:----------------:|
@@ -56,6 +60,8 @@ Every sensor comes with **preset ideal ranges** — just point to your entity an
 
 *Corals consume calcium and alkalinity daily. Keeping them stable is key to growth.*
 
+![Salinity](resources/salinity.png) ![Specific Gravity](resources/specific_gravity.png) ![Calcium](resources/calcium.png) ![Magnesium](resources/magnesium.png) ![Alkalinity](resources/alkalinity.png)
+
 | Sensor | Key | Unit | Default Setpoint |
 |--------|-----|------|:----------------:|
 | Salinity | `salinity` | ppt | 0 |
@@ -67,6 +73,8 @@ Every sensor comes with **preset ideal ranges** — just point to your entity an
 ### Maintenance
 
 *Prevent phosphate-driven algae and catch evaporation before it concentrates salts.*
+
+![Phosphate](resources/phosphate.png) ![Water Level](resources/water_level.png)
 
 | Sensor | Key | Unit | Default Setpoint |
 |--------|-----|------|:----------------:|
