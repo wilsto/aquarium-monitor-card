@@ -4,8 +4,7 @@
 
 > Monitor your aquarium water parameters to keep your fish, corals, and plants healthy — all from your Home Assistant dashboard.
 
-<!-- TODO: add hero screenshot -->
-<!-- ![screenshot](example/hero.png) -->
+![screenshot](example/hero.png)
 
 ---
 
@@ -194,8 +193,8 @@ This card is part of the **monitor-cards** family — same rendering engine, sam
 
 <!-- Badges -->
 [release-shield]: https://img.shields.io/github/v/release/wilsto/aquarium-monitor-card?style=flat-square
-[release-link]: https://github.com/wilsto/aquarium-monitor-card/releases
+[release-link]: https://github.com/wilsto/aquarium-monitor-card/releases/latest
 [hacs-shield]: https://img.shields.io/badge/HACS-Default-orange.svg?style=flat-square
 [hacs-link]: https://hacs.xyz/
 [commits-shield]: https://img.shields.io/github/commit-activity/y/wilsto/aquarium-monitor-card?style=flat-square
-[commits-link]: https://github.com/wilsto/aquarium-monitor-card/commits/master
+[commits-link]: https://github.com/wilsto/aquarium-monitor-card/commits/main
