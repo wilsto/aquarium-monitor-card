@@ -34,44 +34,44 @@ Every sensor comes with **preset ideal ranges** — just point to your entity an
 
 *The #1 killer in aquariums. Ammonia and nitrite must be zero in a cycled tank.*
 
-| Sensor | Unit | Default Setpoint |
-|--------|------|:----------------:|
-| Ammonia | ppm | 0 |
-| Nitrite | ppm | 0 |
-| Nitrate | ppm | 20 |
+| Sensor | Key | Unit | Default Setpoint |
+|--------|-----|------|:----------------:|
+| Ammonia | `ammonia` | ppm | 0 |
+| Nitrite | `nitrite` | ppm | 0 |
+| Nitrate | `nitrate` | ppm | 20 |
 
 ### Water Chemistry
 
 *Stability matters more than hitting exact numbers. Sudden shifts stress fish.*
 
-| Sensor | Unit | Default Setpoint |
-|--------|------|:----------------:|
-| Temperature | °C | 25 |
-| pH | pH | 7.0 |
-| General Hardness | dGH | 8 |
-| Carbonate Hardness | dKH | 6 |
-| CO2 | mg/L | 20 |
+| Sensor | Key | Unit | Default Setpoint |
+|--------|-----|------|:----------------:|
+| Temperature | `temperature` | °C | 25 |
+| pH | `ph` | pH | 7.0 |
+| General Hardness | `gh` | dGH | 8 |
+| Carbonate Hardness | `kh` | dKH | 6 |
+| CO2 | `co2` | mg/L | 20 |
 
 ### Reef & Saltwater
 
 *Corals consume calcium and alkalinity daily. Keeping them stable is key to growth.*
 
-| Sensor | Unit | Default Setpoint |
-|--------|------|:----------------:|
-| Salinity | ppt | 0 |
-| Specific Gravity | sg | 1.025 |
-| Calcium | ppm | 420 |
-| Magnesium | ppm | 1300 |
-| Alkalinity | dKH | 8 |
+| Sensor | Key | Unit | Default Setpoint |
+|--------|-----|------|:----------------:|
+| Salinity | `salinity` | ppt | 0 |
+| Specific Gravity | `specific_gravity` | sg | 1.025 |
+| Calcium | `calcium` | ppm | 420 |
+| Magnesium | `magnesium` | ppm | 1300 |
+| Alkalinity | `alkalinity` | dKH | 8 |
 
 ### Maintenance
 
 *Prevent phosphate-driven algae and catch evaporation before it concentrates salts.*
 
-| Sensor | Unit | Default Setpoint |
-|--------|------|:----------------:|
-| Phosphate | ppm | 0.5 |
-| Water Level | % | 100 |
+| Sensor | Key | Unit | Default Setpoint |
+|--------|-----|------|:----------------:|
+| Phosphate | `phosphate` | ppm | 0.5 |
+| Water Level | `water_level` | % | 100 |
 
 For detailed explanations of each sensor and why it matters, see [Sensor Details](docs/sensors.md).
 
