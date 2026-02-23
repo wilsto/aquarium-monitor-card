@@ -1,4 +1,4 @@
-import type { SensorsRegistry } from '../../core/src/ha/types.js';
+import type { SensorsRegistry } from './ha/types.js';
 
 export const AQUARIUM_SENSORS: SensorsRegistry = {
   temperature: {

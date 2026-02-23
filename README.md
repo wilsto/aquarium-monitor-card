@@ -3,6 +3,8 @@
 [![Release][release-shield]][release-link] [![HACS][hacs-shield]][hacs-link] [![GitHub Activity][commits-shield]][commits-link]
 
 > Monitor your aquarium water parameters to keep your fish, corals, and plants healthy — all from your Home Assistant dashboard.
+>
+> **Visual editor included** — configure everything from the UI, no YAML needed.
 
 ![screenshot](example/hero.png)
 
@@ -119,6 +121,16 @@ Community-tested devices that work with this card:
 
 ## Quick Start
 
+### Visual Editor (recommended)
+
+1. In your dashboard, click **Edit Dashboard** (pencil icon)
+2. Click **+ Add Card** → select **Manual** → type `custom:aquarium-monitor-card`
+3. Click **Show Visual Editor** to configure sensors, display options and colors — no YAML needed
+
+![editor](resources/editor.png)
+
+### YAML
+
 ```yaml
 type: custom:aquarium-monitor-card
 title: "My Aquarium"
@@ -136,6 +148,8 @@ That's it! The card uses sensible defaults for everything else.
 ---
 
 ## Configuration
+
+> All options below are also available in the visual editor.
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|

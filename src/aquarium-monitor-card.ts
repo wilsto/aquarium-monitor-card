@@ -1,7 +1,7 @@
 import { customElement } from 'lit/decorators.js';
-import { MonitorCardBase } from '../../core/src/card-base.js';
+import { MonitorCardBase } from './card-base.js';
 import { AQUARIUM_SENSORS } from './sensors.js';
-import type { SensorsRegistry, CardInfo } from '../../core/src/ha/types.js';
+import type { SensorsRegistry, CardInfo } from './ha/types.js';
 
 declare let __BUILD_TIMESTAMP__: string;
 
@@ -14,6 +14,15 @@ console.info(
   'color: white; background: #0984e3; font-weight: 700;',
   'color: #0984e3; background: white; font-weight: 700;',
 );
+
+(window as any).customCards = (window as any).customCards || [];
+(window as any).customCards.push({
+  type: 'aquarium-monitor-card',
+  name: 'Aquarium Monitor Card',
+  description: 'Monitor aquarium water parameters (pH, ammonia, nitrite, temperature, etc.)',
+  preview: true,
+  documentationURL: 'https://github.com/wilsto/aquarium-monitor-card',
+});
 
 @customElement('aquarium-monitor-card')
 export class AquariumMonitorCard extends MonitorCardBase {
@@ -28,4 +37,17 @@ export class AquariumMonitorCard extends MonitorCardBase {
 
   static IMAGE_BASE_URL =
     'https://raw.githubusercontent.com/wilsto/aquarium-monitor-card/master/resources';
+
+  static async getConfigElement(): Promise<HTMLElement> {
+    await import('./editor.js');
+    return document.createElement('aquarium-monitor-card-editor');
+  }
+
+  static getStubConfig(): Record<string, unknown> {
+    return {
+      sensors: {
+        temperature: { entity: '' },
+      },
+    };
+  }
 }
