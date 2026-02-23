@@ -1,9 +1,6 @@
-/**
- * @fileoverview Aquarium-specific sensor presets
- * Default setpoints for freshwater aquarium — users can override per sensor.
- */
+import type { SensorsRegistry } from '../../core/src/ha/types.js';
 
-export const AQUARIUM_SENSORS = {
+export const AQUARIUM_SENSORS: SensorsRegistry = {
   temperature: {
     name: 'Temperature',
     unit: '°C',
