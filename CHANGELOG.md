@@ -3,6 +3,16 @@
 All notable changes to Aquarium Monitor Card will be documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.15.0] - 2026-08-16
+
+### Fixed
+
+- **Six measurements showed their internal key instead of their name.** Ammonia was labelled `sensor.ammonia` under the bar, and the same for nitrite, nitrate, general hardness, carbonate hardness and CO2. They had no name defined in any language, not even English, so the card printed the key.
+
+  All six now have a name, in the seventeen languages the card speaks. Ammonia, Nitrite, Nitrate, General Hardness, Carbonate Hardness, CO2, and their translations.
+
+- **The names the editor offers and the names the card shows now agree.** Picking General Hardness in the editor used to display GH on the card, Carbonate Hardness displayed KH, CO2 displayed Carbon Dioxide. What you choose is what you see.
+
 ## [0.14.1] - 2026-08-16
 
 ### Documentation

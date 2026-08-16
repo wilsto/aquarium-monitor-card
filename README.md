@@ -36,7 +36,7 @@ Every sensor comes with **preset ideal ranges**: just point to your entity and t
 
 ![Ammonia](resources/ammonia.png) ![Nitrite](resources/nitrite.png) ![Nitrate](resources/nitrate.png)
 
-| Sensor | Key | Unit | Default Setpoint |
+| Sensor | Key | Unit | Defaults |
 |--------|-----|------|:----------------:|
 | Ammonia | `ammonia` | ppm | 0 |
 | Nitrite | `nitrite` | ppm | 0 |
@@ -48,7 +48,7 @@ Every sensor comes with **preset ideal ranges**: just point to your entity and t
 
 ![Temperature](resources/temperature.png) ![pH](resources/ph.png) ![General Hardness](resources/gh.png) ![Carbonate Hardness](resources/kh.png) ![CO2](resources/co2.png)
 
-| Sensor | Key | Unit | Default Setpoint |
+| Sensor | Key | Unit | Defaults |
 |--------|-----|------|:----------------:|
 | Temperature | `temperature` | °C | 25 |
 | pH | `ph` | pH | 7.0 |
@@ -62,7 +62,7 @@ Every sensor comes with **preset ideal ranges**: just point to your entity and t
 
 ![Salinity](resources/salinity.png) ![Specific Gravity](resources/specific_gravity.png) ![Calcium](resources/calcium.png) ![Magnesium](resources/magnesium.png) ![Alkalinity](resources/alkalinity.png)
 
-| Sensor | Key | Unit | Default Setpoint |
+| Sensor | Key | Unit | Defaults |
 |--------|-----|------|:----------------:|
 | Salinity | `salinity` | ppt | 0 |
 | Specific Gravity | `specific_gravity` | sg | 1.025 |
@@ -76,7 +76,7 @@ Every sensor comes with **preset ideal ranges**: just point to your entity and t
 
 ![Phosphate](resources/phosphate.png) ![Water Level](resources/water_level.png)
 
-| Sensor | Key | Unit | Default Setpoint |
+| Sensor | Key | Unit | Defaults |
 |--------|-----|------|:----------------:|
 | Phosphate | `phosphate` | ppm | 0.5 |
 | Water Level | `water_level` | % | 100 |
@@ -308,7 +308,7 @@ This card is part of the **monitor-cards** family: same rendering engine, same f
 |------|-----|---------|
 | [Pool Monitor Card](https://github.com/wilsto/pool-monitor-card) | Pool & spa owners | 28 presets |
 | [Aquarium Monitor Card](https://github.com/wilsto/aquarium-monitor-card) | Freshwater & saltwater aquarium keepers | 15 presets ← *you are here* |
-| [Air Quality Card](https://github.com/wilsto/air-quality-card) | Homeowners concerned about indoor air quality | 12 presets |
+| [Air Monitor Card](https://github.com/wilsto/air-quality-card) | Homeowners concerned about indoor air quality | 13 presets |
 | [Sensor Monitor Card](https://github.com/wilsto/sensor-monitor-card) | Home Assistant power users | unlimited (custom) |
 
 <!-- Badges -->
