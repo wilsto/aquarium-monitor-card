@@ -2,7 +2,7 @@
 
 [![Release][release-shield]][release-link] [![HACS][hacs-shield]][hacs-link] [![GitHub Activity][commits-shield]][commits-link]
 
-> Monitor your aquarium water parameters to keep your fish, corals, and plants healthy — all from your Home Assistant dashboard.
+> Monitor your aquarium water parameters to keep your fish, corals, and plants healthy, all from your Home Assistant dashboard.
 
 ![screenshot](example/hero.png)
 
@@ -12,7 +12,7 @@
 
 Stable water chemistry is the difference between a thriving tank and a crash. This card tracks up to **15 parameters** with preset ideal ranges for freshwater and reef tanks.
 
-Gradient bars instantly highlight out-of-range values so you can act **before your livestock is stressed** — not after.
+Gradient bars instantly highlight out-of-range values so you can act **before your livestock is stressed**, not after.
 
 Presets are tuned for general freshwater aquariums by default. Reef keepers can override calcium, magnesium, and alkalinity for their higher requirements.
 
@@ -28,7 +28,7 @@ Presets are tuned for general freshwater aquariums by default. Reef keepers can 
 
 ## Sensors (15 presets)
 
-Every sensor comes with **preset ideal ranges** — just point to your entity and the card handles the rest. Override any value to match your setup.
+Every sensor comes with **preset ideal ranges**: just point to your entity and the card handles the rest. Override any value to match your setup.
 
 ### Nitrogen Cycle
 
@@ -139,8 +139,8 @@ That's it! The card uses sensible defaults for everything else.
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `title` | string | — | Card title |
-| `sensors` | object | — | Sensor definitions (see below) |
+| `title` | string | - | Card title |
+| `sensors` | object | - | Sensor definitions (see below) |
 | `display.compact` | boolean | `false` | Compact display mode |
 | `display.show_names` | boolean | `true` | Show sensor names |
 | `display.show_icons` | boolean | `true` | Show sensor icons |
@@ -172,7 +172,7 @@ of the visible scale, a **string** is an entity whose value places a tracking
 marker on the bar.
 
 Without them, the bar spans `setpoint ± 3 × step`, and the coloured zones
-change every `step`. So `step` is what widens or narrows the green zone —
+change every `step`. So `step` is what widens or narrows the green zone:
 a larger `step` is more tolerant, a smaller one more strict.
 
 ### Quantities whose ideal is at one end
@@ -222,7 +222,7 @@ card_mod:
 sensors: ...
 ```
 
-**Sizes, colours, spacing** — target the classes below:
+**Sizes, colours, spacing**: target the classes below:
 
 ```yaml
 card_mod:
@@ -234,8 +234,8 @@ card_mod:
 
 > **Why some rules need `!important`.** The card ships its styles as an
 > adopted stylesheet, and those win over an injected one at equal
-> specificity. So a property the card already sets — a font size, a bar
-> height — needs `!important` or a more specific selector such as
+> specificity. So a property the card already sets (a font size, a bar
+> height) needs `!important` or a more specific selector such as
 > `h1.pool-monitor-title`. A property the card does **not** set, like the
 > icon colour above, applies with no ceremony. Styling `ha-card` itself
 > also works plainly: that rule crosses a shadow boundary, where the
@@ -258,7 +258,7 @@ card_mod:
 
 ### Languages
 
-15 languages supported: Čeština, Deutsch, English, Español, Français, עברית, Magyar, Italiano, Nederlands, Português, Português (Brasil), Română, Русский, Slovenčina, Svenska.
+17 languages supported: Català, Čeština, Dansk, Deutsch, English, Español, Français, עברית, Magyar, Italiano, Nederlands, Português, Português (Brasil), Română, Русский, Slovenčina, Svenska.
 
 Set one with `display.language`, or pick it in the visual editor.
 
@@ -270,7 +270,7 @@ Set one with `display.language`, or pick it in the visual editor.
 
 ## Monitor Cards Family
 
-This card is part of the **monitor-cards** family — same rendering engine, same features, different presets:
+This card is part of the **monitor-cards** family: same rendering engine, same features, different presets:
 
 | Card | For | Sensors |
 |------|-----|---------|

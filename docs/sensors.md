@@ -1,4 +1,4 @@
-# Aquarium Monitor Card — Sensor Details
+# Aquarium Monitor Card: Sensor Details
 
 This document explains each sensor, why it matters, and what the ideal ranges mean.
 
