@@ -3,6 +3,16 @@
 All notable changes to Aquarium Monitor Card will be documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.15.1] - 2026-08-16
+
+### Documentation
+
+- **The picture at the top of this page is new, and it moves.** The old one was a screenshot of a development bench taken in March: cards titled Compact Display and Color Customisation, a row in Russian, a sensor called MY CUSTOM TEMP NAME, and nothing that shipped since.
+
+  The new one follows a new tank through its nitrogen cycle: ammonia spikes, nitrite takes over as it falls, nitrate piles up behind both, and a water change settles it. The reef beside it drains its calcium and alkalinity and gets dosed back.
+
+  It is also reproducible now. The card is a plain web component, so the picture is rendered from the source in a browser with no Home Assistant around it, which means it can be retaken by anyone at any version instead of by whoever had the bench running.
+
 ## [0.15.0] - 2026-08-16
 
 ### Fixed

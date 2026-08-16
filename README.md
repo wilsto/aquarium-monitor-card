@@ -4,7 +4,7 @@
 
 > Monitor your aquarium water parameters to keep your fish, corals, and plants healthy, all from your Home Assistant dashboard.
 
-![screenshot](example/hero.png)
+![screenshot](example/hero.gif)
 
 ---
 
