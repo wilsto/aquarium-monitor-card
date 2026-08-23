@@ -1,5 +1,6 @@
 import { MonitorCardBase, defineCard } from './card-base.js';
 import { AQUARIUM_SENSORS } from './sensors.js';
+import { applyTankType } from './tank-types.js';
 import type { SensorsRegistry, CardInfo } from './ha/types.js';
 import { buildEntitySuggestion } from './entity-suggestion.js';
 
@@ -62,6 +63,17 @@ export class AquariumMonitorCard extends MonitorCardBase {
   static async getConfigElement(): Promise<HTMLElement> {
     await import('./editor.js');
     return document.createElement('aquarium-monitor-card-editor');
+  }
+
+  /**
+   * `tank_type` picks which set of thresholds the presets carry before the base
+   * class merges them with what the user wrote (#73). It is folded in here
+   * rather than in the shared registry because the registry is a static, one per
+   * card class, and two aquarium cards on the same dashboard may well be
+   * watching two different tanks.
+   */
+  setConfig(config: any): void {
+    super.setConfig(applyTankType(config));
   }
 
   static getStubConfig(): Record<string, unknown> {

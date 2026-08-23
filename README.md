@@ -16,7 +16,7 @@ Stable water chemistry is the difference between a thriving tank and a crash. Th
 
 Gradient bars instantly highlight out-of-range values so you can act **before your livestock is stressed**, not after.
 
-Presets are tuned for general freshwater aquariums by default. Reef keepers can override calcium, magnesium, and alkalinity for their higher requirements.
+Presets are tuned for general freshwater aquariums by default. A reef is a different chemistry: `tank_type: reef` switches the readings whose published reef targets differ, and any preset can still be overridden sensor by sensor.
 
 ### What you can do
 
@@ -40,8 +40,8 @@ Every sensor comes with **preset ideal ranges**: just point to your entity and t
 
 | Sensor | Key | Unit | Defaults |
 |--------|-----|------|:----------------:|
-| Ammonia | `ammonia` | ppm | 0 |
-| Nitrite | `nitrite` | ppm | 0 |
+| Ammonia | `ammonia` | ppm | 0.25 / 0.5 / 1 / 2 |
+| Nitrite | `nitrite` | ppm | 0.25 / 0.5 / 1 / 2 |
 | Nitrate | `nitrate` | ppm | 20 |
 
 ### Water Chemistry
@@ -66,7 +66,7 @@ Every sensor comes with **preset ideal ranges**: just point to your entity and t
 
 | Sensor | Key | Unit | Defaults |
 |--------|-----|------|:----------------:|
-| Salinity | `salinity` | ppt | 0 |
+| Salinity | `salinity` | ppt | 1 / 3 / 10 / 35 |
 | Specific Gravity | `specific_gravity` | sg | 1.025 |
 | Calcium | `calcium` | ppm | 420 |
 | Magnesium | `magnesium` | ppm | 1300 |
@@ -145,6 +145,7 @@ That's it! The card uses sensible defaults for everything else.
 | `sensors` | object | - | Sensor definitions (see below) |
 | `status_entity` | string | - | Entity whose state is shown as a badge at the top of the card |
 | `battery_entity` | string | - | One battery for the whole device, shown once beside the status |
+| `tank_type` | string | `freshwater` | Which tank this is, `freshwater` or `reef`. Picks the thresholds of `ph`, `salinity` and `phosphate`, see below |
 | `display.compact` | boolean | `false` | Compact display mode |
 | `display.show_names` | boolean | `true` | Show sensor names |
 | `display.show_icons` | boolean | `true` | Show sensor icons |
@@ -155,7 +156,36 @@ That's it! The card uses sensible defaults for everything else.
 | `display.name_font_size` | string | - | Font size of the sensor name, e.g. `0.8em` |
 | `display.name_font_weight` | string | - | Font weight of the sensor name |
 | `display.language` | string | `en` | Language code, one of the 17 shipped |
-| `colors.*` | string | - | Any colour of the palette, see the Styling section |
+| `colors.*` | string | - | Any colour of the palette, see the Colours section |
+
+### Freshwater or reef
+
+A community tank and a reef are not the same water, so a single set of thresholds cannot serve both. `tank_type` says which one this card is watching, and that choice picks the thresholds of `ph`, `salinity` and `phosphate`.
+
+```yaml
+type: custom:aquarium-monitor-card
+title: "My Aquarium"
+tank_type: reef
+sensors:
+  ph:
+    entity: sensor.your_ph_sensor
+  salinity:
+    entity: sensor.your_salinity_sensor
+  phosphate:
+    entity: sensor.your_phosphate_sensor
+```
+
+Leave the option out and you get `freshwater`, whose values are the ones listed in the Sensors table above. What the choice moves:
+
+- **pH** (`ph`): `freshwater` 7.0 pH, `reef` 8.2 pH. A reef is kept at 8.1 to 8.4, higher than the ocean because calcification runs better there. The freshwater target would read as an emergency on a reef.
+- **Salinity** (`salinity`): `freshwater` 1 / 3 / 10 / 35 ppt, `reef` 35 ppt. The two scales do not even have the same shape. Freshwater grades how far the water has drifted away from fresh, less being better; a reef grades how far it has drifted from the salinity of the ocean, in either direction.
+- **Phosphate** (`phosphate`): `freshwater` 0.5 ppm, `reef` 0.06 ppm. A reef is run about ten times leaner. The freshwater target sits above every published reef ceiling, so a reef in real trouble would still read as acceptable.
+
+Every other reading keeps one scale whatever the tank, **nitrate included**. Published reef targets for it disagree by a factor of five, from 2 to 10 ppm at one end to 5 to 50 at the other, so the card picks no winner between two credible sources: set `setpoint` and `step` on the sensor yourself if your own target is firm.
+
+What you write on a sensor still wins over the tank type, which wins over the card's own preset. Anything other than `freshwater` or `reef` is refused with an error naming the accepted values, rather than quietly falling back: a typo would otherwise show a reef the freshwater scale, which is the failure this option removes.
+
+> **This one is written in YAML.** The visual editor has no control for it yet, but it does not lose it either: open a card that sets `tank_type`, change anything else in the editor, and the option is still there.
 
 ### Per-sensor overrides
 
@@ -227,22 +257,46 @@ sensors:
     # direction: lower_is_better (default) | higher_is_better
 ```
 
-### Multiple sensors of the same type
+### Several probes for the same measurement
+
+A probe in the display tank and another in the sump, or one tank per shelf:
+any sensor key accepts a **list** instead of a single block. Each entry
+gets its own bar. Nothing to install, nothing to enable, it has always
+worked.
 
 ```yaml
+type: custom:aquarium-monitor-card
+title: "My Aquarium"
 sensors:
   temperature:
-    - entity: sensor.sensor_1
-      name: Location 1
-    - entity: sensor.sensor_2
-      name: Location 2
+    - entity: sensor.temperature_display_tank
+      name: Display tank
+    - entity: sensor.temperature_sump
+      name: Sump
 ```
+
+- **Each entry takes the full set of options above.** `min`, `max`, `setpoint`, `icon`, `status_entity`, `battery_entity`, all of them, and they are independent.
+- **The preset still applies to every entry.** `temperature` keeps its ideal range, its unit and its icon unless that entry overrides them.
+- **Give each one a `name`.** Without it every entry falls back to the same default label, and the bars become impossible to tell apart.
+- **`entity` is required on every entry.** A missing one stops the card with `Missing entity for temperature[1]`, the number being the position in the list counting from zero.
+
+> **The visual editor edits these, but does not create them.** Once a preset is configured it leaves the *Add sensor* list, so the second entry is added in YAML. After that the editor shows both as *#1* and *#2*, each expandable and deletable on its own.
 
 ### Styling
 
 The card renders a standard `ha-card`, so it responds to your Home Assistant
 theme and to [card-mod](https://github.com/thomasloven/lovelace-card-mod) like
 any other card.
+
+> **Install card-mod first, it does not come with Home Assistant.**
+> It is a separate frontend component, not part of this card and not
+> bundled with it. Until it is installed a `card_mod:` block is simply
+> ignored: the styles do nothing and no error says why.
+>
+> It is in the HACS default store. HACS → search **card-mod** → install →
+> reload your browser. Everything in this section assumes it is there;
+> installation details live in the
+> [card-mod repository](https://github.com/thomasloven/lovelace-card-mod).
 
 **Transparent, borderless:**
 
@@ -292,6 +346,32 @@ card_mod:
 > they follow the sensor value rather than a stylesheet. Everything listed
 > above is static and can be overridden.
 
+### Colours
+
+The bands are painted from an eight-colour palette. Override any of them
+under `colors:`, in YAML or in the visual editor. No card-mod involved.
+
+```yaml
+colors:
+  normal: "#00b894"
+  warn: "#e17055"
+```
+
+| Key | Default | What it paints |
+| --- | --- | --- |
+| `colors.low` | `#fdcb6e` | One band out from the ideal, on either side of a centric scale |
+| `colors.warn` | `#e17055` | The outer band, and the hot end of a `heatflow` scale |
+| `colors.normal` | `#00b894` | The ideal band, in every mode |
+| `colors.fair` | `#7ec181` | Second band of a `limits` scale, still acceptable but no longer ideal |
+| `colors.cool` | `#00BFFF` | The cold end of a `heatflow` scale, and the low end of its gradient bar |
+| `colors.hazardous` | `#8e44ad` | Worst band of a `limits` scale |
+| `colors.marker` | `#000000` | The current-value cursor |
+| `colors.hi_low` | `#00000099` | The `min` and `max` tracking ticks |
+
+> `fair` and `hazardous` only appear on a scale built with `limits`, where
+> the reading runs from good to bad in one direction. A centric scale never
+> reaches them.
+
 ### Languages
 
 17 languages supported: Català, Čeština, Dansk, Deutsch, English, Español, Français, עברית, Magyar, Italiano, Nederlands, Português, Português (Brasil), Română, Русский, Slovenčina, Svenska.
@@ -310,14 +390,21 @@ Set one with `display.language`, or pick it in the visual editor.
 
 This card wouldn't be what it is today without our amazing contributors!
 
-- [Sebaer1976](https://github.com/sebaer1976): German translation
+- [arketec](https://github.com/arketec): Design of the derivative-driven trend indicators (chevrons), from his fork ([commit 4730f95](https://github.com/arketec/pool-monitor-card/commit/4730f95))
+- [sierramike](https://github.com/sierramike): Home Assistant rendering compliance: the `ha-card` wrapper and the card picker registration ([pool-monitor-card#67](https://github.com/wilsto/pool-monitor-card/pull/67))
+- [daveewall](https://github.com/daveewall): WaterGuru SENSE report that specified the card-level `battery_entity` and the per-sensor `status_entity` ([pool-monitor-card#77](https://github.com/wilsto/pool-monitor-card/issues/77))
+- [ahuffman](https://github.com/ahuffman): Proposal to list several entities under one sensor type, which became the v2 configuration format ([pool-monitor-card#25](https://github.com/wilsto/pool-monitor-card/issues/25))
+- [woopstar](https://github.com/woopstar): Showed that Danish plurals differ from one time unit to the next, which produced the `time_plural` block every locale carries ([pool-monitor-card#53](https://github.com/wilsto/pool-monitor-card/issues/53))
+- [rocknrolla85](https://github.com/rocknrolla85): Named what both scale modes got wrong for ORP and TDS, which produced `direction: lower_is_better / higher_is_better` ([pool-monitor-card#85](https://github.com/wilsto/pool-monitor-card/issues/85))
+- [Kraut-bob](https://github.com/Kraut-bob): Described the third scale mode, for readings whose best value is zero ([air-quality-card#2](https://github.com/wilsto/air-quality-card/issues/2))
+- [Seebaer1976](https://github.com/seebaer1976): German translation
 - [Splitti](https://github.com/splitti): German translation
-- [jorgemiguel4](https://github.com/jorgemiguel4): Portuguese translation
 - [Djgel](https://github.com/djgel): Portuguese translation
 - [CosminFRC](https://github.com/CosminFRC): Romanian translation
 - [Misa1515](https://github.com/misa1515): Slovak translation
-- [ViPeR5000](https://github.com/ViPeR5000): Polish translation
+- [ViPeR5000](https://github.com/ViPeR5000): Portuguese translation
 - [Yehuda](https://github.com/Yehuda): Hebrew translation
+- [mmiguel4](https://github.com/mmiguel4): Portuguese translation
 - [MrSnakeSPb](https://github.com/MrSnakeSPb): Russian translation
 - [taczirjak](https://github.com/taczirjak): Hungarian translation
 - [KIDNORswe](https://github.com/KIDNORswe): Swedish translation

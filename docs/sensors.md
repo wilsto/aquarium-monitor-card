@@ -9,14 +9,14 @@ This document explains each sensor, why it matters, and what the ideal ranges me
 ### Ammonia (`ammonia`)
 
 - **Unit**: ppm
-- **Defaults**: 0
+- **Defaults**: 0.25 / 0.5 / 1 / 2
 
 Must be 0 ppm in a cycled tank. Any reading means your biofilter is overwhelmed or cycling.
 
 ### Nitrite (`nitrite`)
 
 - **Unit**: ppm
-- **Defaults**: 0
+- **Defaults**: 0.25 / 0.5 / 1 / 2
 
 Must be 0 ppm in a cycled tank. Toxic to fish even at low levels.
 
@@ -42,6 +42,7 @@ Most tropical fish thrive at 24-26°C. Stability is more important than hitting 
 
 - **Unit**: pH
 - **Defaults**: 7.0
+- **With `tank_type: reef`**: 8.2
 
 Freshwater: 6.5-7.5 depending on species. Marine: 8.1-8.4. Avoid sudden swings.
 
@@ -73,7 +74,8 @@ Planted tanks target 20-30 mg/L during lights-on. Too much suffocates fish.
 ### Salinity (`salinity`)
 
 - **Unit**: ppt
-- **Defaults**: 0
+- **Defaults**: 1 / 3 / 10 / 35
+- **With `tank_type: reef`**: 35
 
 Marine tanks: 33-35 ppt. Freshwater: 0. Brackish: varies by species.
 
@@ -113,6 +115,7 @@ Reef tanks: 7-11 dKH. The most important stability parameter for coral health.
 
 - **Unit**: ppm
 - **Defaults**: 0.5
+- **With `tank_type: reef`**: 0.06
 
 Feeds algae. Keep below 0.5 ppm. Reduce with water changes or phosphate remover.
 

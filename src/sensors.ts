@@ -7,7 +7,9 @@ export const AQUARIUM_SENSORS: SensorsRegistry = {
     setpoint: 25,
     step: 1,
     mode: 'heatflow',
+    category: 'water_chemistry',
   },
+  // Freshwater target. A reef is kept a full unit higher, see tank-types.ts.
   ph: {
     name: 'pH',
     unit: 'pH',
@@ -15,6 +17,7 @@ export const AQUARIUM_SENSORS: SensorsRegistry = {
     step: 0.3,
     mode: 'centric',
     min_limit: 0,
+    category: 'water_chemistry',
   },
   // Ammonia and nitrite are the two readings where zero is the target and every
   // step up is worse, never an equivalent deviation. A centred scale cannot say
@@ -58,6 +61,7 @@ export const AQUARIUM_SENSORS: SensorsRegistry = {
     limits: [0.25, 0.5, 1, 2],
     direction: 'lower_is_better',
     min_limit: 0,
+    category: 'nitrogen_cycle',
   },
   nitrite: {
     name: 'Nitrite',
@@ -70,6 +74,7 @@ export const AQUARIUM_SENSORS: SensorsRegistry = {
     limits: [0.25, 0.5, 1, 2],
     direction: 'lower_is_better',
     min_limit: 0,
+    category: 'nitrogen_cycle',
   },
   // Nitrate deliberately stays centred. Unlike ammonia and nitrite, zero is not
   // the ideal: a reef tank starves its corals below roughly 3 ppm, and in a
@@ -84,6 +89,7 @@ export const AQUARIUM_SENSORS: SensorsRegistry = {
     step: 10,
     mode: 'centric',
     min_limit: 0,
+    category: 'nitrogen_cycle',
   },
   gh: {
     name: 'General Hardness',
@@ -92,6 +98,7 @@ export const AQUARIUM_SENSORS: SensorsRegistry = {
     step: 2,
     mode: 'centric',
     min_limit: 0,
+    category: 'water_chemistry',
   },
   kh: {
     name: 'Carbonate Hardness',
@@ -100,6 +107,7 @@ export const AQUARIUM_SENSORS: SensorsRegistry = {
     step: 1,
     mode: 'centric',
     min_limit: 0,
+    category: 'water_chemistry',
   },
   co2: {
     name: 'CO2',
@@ -108,7 +116,10 @@ export const AQUARIUM_SENSORS: SensorsRegistry = {
     step: 5,
     mode: 'centric',
     min_limit: 0,
+    category: 'water_chemistry',
   },
+  // Freshwater target, where phosphate is a plant nutrient dosed in tenths of a
+  // ppm. A reef is kept about ten times lower, see tank-types.ts.
   phosphate: {
     name: 'Phosphate',
     unit: 'ppm',
@@ -116,14 +127,37 @@ export const AQUARIUM_SENSORS: SensorsRegistry = {
     step: 0.25,
     mode: 'centric',
     min_limit: 0,
+    category: 'maintenance',
   },
+  // Salinity is the reading that cannot be shared between a freshwater tank and
+  // a reef, and the reason this card now asks which one it is looking at. This
+  // registry holds the freshwater case, which is the default; the reef values
+  // live in tank-types.ts.
+  //
+  // The freshwater scale was centred on a setpoint of 0 with a step of 1 and a
+  // floor at 0, so three of its five classes collapsed onto 0 and everything
+  // above 2 ppt fell into the worst class. That made a marine tank read as
+  // maximally bad forever (#73), and it gave a freshwater tank three labels
+  // stacked on the same point. Zero being the ideal and every step up being
+  // worse is a band scale, not a centred one, exactly as for ammonia above.
+  //
+  // The boundaries are the USGS salinity classes for a body of water, converted
+  // from ppm to ppt: fresh below 1000 ppm, slightly saline to 3000, moderately
+  // saline to 10 000, highly saline to 35 000, which is the ocean. They classify
+  // the water rather than the fish's tolerance of it, an assumed simplification,
+  // but they are published boundaries for this quantity in these units and the
+  // direction they express, away from fresh is worse for a freshwater tank, is
+  // the right one.
+  //
+  // Source: Saline Water and Salinity, USGS Water Science School.
+  // https://www.usgs.gov/special-topics/water-science-school/science/saline-water-and-salinity
   salinity: {
     name: 'Salinity',
     unit: 'ppt',
-    setpoint: 0,
-    step: 1,
-    mode: 'centric',
+    limits: [1, 3, 10, 35],
+    direction: 'lower_is_better',
     min_limit: 0,
+    category: 'reef',
   },
   specific_gravity: {
     name: 'Specific Gravity',
@@ -131,6 +165,7 @@ export const AQUARIUM_SENSORS: SensorsRegistry = {
     setpoint: 1.025,
     step: 0.002,
     mode: 'centric',
+    category: 'reef',
   },
   calcium: {
     name: 'Calcium',
@@ -139,6 +174,7 @@ export const AQUARIUM_SENSORS: SensorsRegistry = {
     step: 20,
     mode: 'centric',
     min_limit: 0,
+    category: 'reef',
   },
   magnesium: {
     name: 'Magnesium',
@@ -147,6 +183,7 @@ export const AQUARIUM_SENSORS: SensorsRegistry = {
     step: 50,
     mode: 'centric',
     min_limit: 0,
+    category: 'reef',
   },
   alkalinity: {
     name: 'Alkalinity',
@@ -155,6 +192,7 @@ export const AQUARIUM_SENSORS: SensorsRegistry = {
     step: 1,
     mode: 'centric',
     min_limit: 0,
+    category: 'reef',
   },
   water_level: {
     name: 'Water Level',
@@ -163,5 +201,6 @@ export const AQUARIUM_SENSORS: SensorsRegistry = {
     step: 5,
     mode: 'centric',
     min_limit: 0,
+    category: 'maintenance',
   },
 };

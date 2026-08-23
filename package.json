@@ -1,6 +1,6 @@
 {
   "name": "aquarium-monitor-card",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "type": "module",
   "description": "Aquarium Monitor Card for Home Assistant",
   "main": "dist/aquarium-monitor-card.js",
